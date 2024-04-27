@@ -61,29 +61,29 @@ def load_phonemizer_configs_asr_f0_bert(language:str="en-us",
     """
     global_phonemizer = phonemizer.backend.EspeakBackend(language=language, preserve_punctuation=True,  with_stress=True)
     
-    if add_cwd is True:
-        config_path = os.path.join(ROOT, "styletts2", config_path)
+    # if add_cwd is True:
+    config_path = os.path.join(ROOT, "styletts2", config_path)
     config = yaml.safe_load(open(config_path))
 
 
     # load pretrained ASR model
     ASR_config = config.get('ASR_config', False)
     ASR_path = config.get('ASR_path', False)
-    if add_cwd is True:
-        ASR_path = os.path.join(ROOT, ASR_path)
-        ASR_config = os.path.join(ROOT, ASR_config)
+    # if add_cwd is True:
+    ASR_path = os.path.join(ROOT, ASR_path)
+    ASR_config = os.path.join(ROOT, ASR_config)
     text_aligner = load_ASR_models(ASR_path, ASR_config)
 
     # load pretrained F0 model
     F0_path = config.get('F0_path', False)
-    if add_cwd is True:
-        F0_path = os.path.join(ROOT, F0_path)
+    # if add_cwd is True:
+    F0_path = os.path.join(ROOT, F0_path)
     pitch_extractor = load_F0_models(F0_path)
 
     # load BERT model
     BERT_path = config.get('PLBERT_dir', False)
-    if add_cwd is True:
-        BERT_path = os.path.join(ROOT, BERT_path)
+    # if add_cwd is True:
+    BERT_path = os.path.join(ROOT, BERT_path)
     plbert = load_plbert(BERT_path)
 
     return global_phonemizer, config, text_aligner, pitch_extractor, plbert
