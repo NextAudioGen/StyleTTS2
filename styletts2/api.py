@@ -62,7 +62,7 @@ def load_phonemizer_configs_asr_f0_bert(language:str="en-us",
     global_phonemizer = phonemizer.backend.EspeakBackend(language=language, preserve_punctuation=True,  with_stress=True)
     
     if add_cwd is True:
-        config_path = os.path.join(ROOT, config_path)
+        config_path = os.path.join(ROOT, "styletts2", config_path)
     config = yaml.safe_load(open(config_path))
 
 
@@ -178,7 +178,7 @@ class StyleTTS:
         if load_from_HF is True:
             if model_path is None: 
                 
-                model_path = os.path.join(ROOT,"models_weight")
+                model_path = os.path.join(ROOT, "styletts2", "models_weight")
                 if not os.path.exists(model_path):
                     os.makedirs(model_path, exist_ok=True)
                     os.system(f"git clone {model_remote_path} {model_path}")
