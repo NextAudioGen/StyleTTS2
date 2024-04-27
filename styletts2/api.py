@@ -179,6 +179,7 @@ class StyleTTS:
             if model_path is None: 
                 
                 model_path = os.path.join(ROOT, "styletts2", "models_weight")
+                print("***model_path***=", model_path)
                 if not os.path.exists(model_path):
                     os.makedirs(model_path, exist_ok=True)
                     os.system(f"git clone {model_remote_path} {model_path}")
