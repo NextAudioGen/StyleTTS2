@@ -17,7 +17,7 @@ typing
 typing-extensions
 monotonic_align @ git+https://github.com/resemble-ai/monotonic_align.git
 phonemizer
-
+txtsplit
 
 
 torch @ https://download.pytorch.org/whl/cu118 ; sys_platform == 'win32'

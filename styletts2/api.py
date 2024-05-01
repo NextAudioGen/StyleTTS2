@@ -34,6 +34,7 @@ from .Modules.diffusion.sampler import DiffusionSampler, ADPM2Sampler, KarrasSch
 from typing import Tuple, Type, Union
 from numpy.typing import NDArray
 import os
+from txtsplit import txtsplit
 
 # runs first time after installation only
 import nltk
@@ -496,7 +497,8 @@ class StyleTTS:
             NDArray: The generated audio waveform as a numpy array.
         """
         if ref_s is None: ref_s = self.load_random_ref_s()
-        sentences = text.split('.') # simple split by dot (what about split_and_recombine_text tortoise. I'll check it out later)
+        # sentences = text.split('.') # simple split by dot (what about split_and_recombine_text tortoise. I'll check it out later)
+        sentences = txtsplit(text)
         wavs = []
         s_prev = None
         for text in sentences:
