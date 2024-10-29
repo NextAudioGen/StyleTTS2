@@ -111,7 +111,7 @@ def load_model(weight_path:str, config:dict,
     _ = [model[key].eval() for key in model]
     _ = [model[key].to(device) for key in model]
 
-    params_whole = torch.load(weight_path, map_location='device')
+    params_whole = torch.load(weight_path, map_location='cpu')
     params = params_whole['net']
     
 
@@ -329,7 +329,7 @@ class StyleTTS:
 
         return out.squeeze().cpu().numpy()[..., :-50] # weird pulse at the end of the model, need to be fixed later
 
-    def compute_style(self, wave=None, sr=None, path=None, device='cpu')->torch.Tensor:
+    def compute_style(self, wave=None, sr=None, path=None)->torch.Tensor:
         """
         Compute the style representation for the given audio. If path is provided, it will load the audio from the path.
         Otherwise, it will use the wave and sr arguments.
@@ -348,7 +348,7 @@ class StyleTTS:
         audio, index = librosa.effects.trim(wave, top_db=30)
         if sr != 24000:
             audio = librosa.resample(audio, orig_sr=sr, target_sr=24000)
-        mel_tensor = self.preprocess(audio).to(device)
+        mel_tensor = self.preprocess(audio).to(self.device)
 
         with torch.no_grad():
             ref_s = self.model.style_encoder(mel_tensor.unsqueeze(1))
