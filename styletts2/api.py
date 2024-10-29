@@ -133,7 +133,7 @@ def load_model(weight_path:str, config:dict,
     #                 _load(params[key], model[key])
     _ = [model[key].eval() for key in model]
 
-
+    model.to(device)
     return model, model_params
 
 def load_sampler(model: torch.nn.Module) -> torch.nn.Module:
