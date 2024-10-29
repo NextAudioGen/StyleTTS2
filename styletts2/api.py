@@ -111,7 +111,7 @@ def load_model(weight_path:str, config:dict,
     _ = [model[key].eval() for key in model]
     _ = [model[key].to(device) for key in model]
 
-    params_whole = torch.load(weight_path, map_location='cpu')
+    params_whole = torch.load(weight_path, map_location='device')
     params = params_whole['net']
     
 
@@ -133,7 +133,7 @@ def load_model(weight_path:str, config:dict,
     #                 _load(params[key], model[key])
     _ = [model[key].eval() for key in model]
 
-    model.to(device)
+    # model.to(device)
     return model, model_params
 
 def load_sampler(model: torch.nn.Module) -> torch.nn.Module:
